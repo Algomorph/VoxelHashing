@@ -2,6 +2,8 @@
 #ifndef CORE_MESH_TRIMESH_INL_H_
 #define CORE_MESH_TRIMESH_INL_H_
 
+#include <map>
+
 namespace ml {
 	
 	template<class FloatType>
@@ -144,7 +146,7 @@ namespace ml {
             }
         };
         
-        map<Edge, UINT, edgeCompare> edgeToNewVertexMap;
+        std::map<Edge, UINT, edgeCompare> edgeToNewVertexMap;
 
         TriMesh<FloatType> result;
         

@@ -2,6 +2,7 @@
 #ifndef _COREMESH_TRIMESHACCELERATOR_H_
 #define _COREMESH_TRIMESHACCELERATOR_H_
 
+#include <core-mesh/triMesh.h>
 namespace ml {
 
 //////////////////////////////////////////////////////////////////////////
@@ -26,7 +27,7 @@ public:
 
 	void build(const std::vector<const TriMesh<FloatType>* >& triMeshes, bool storeLocalCopy = false) {
 		destroy();
-		std::vector<const std::vector<typename TriMesh<FloatType>::Vertex<FloatType>>*> vertices(triMeshes.size());
+		std::vector<const std::vector<typename TriMesh<FloatType>::template Vertex<FloatType>>*> vertices(triMeshes.size());
 		std::vector<const std::vector<vec3ui>*> indices(triMeshes.size());
 
 		if (storeLocalCopy) {
@@ -57,7 +58,7 @@ public:
 	void build(const std::vector<std::pair<const TriMesh<FloatType>*, Matrix4x4<FloatType>>>& triMeshPairs) {
 		destroy();
 
-		std::vector<const std::vector<typename TriMesh<FloatType>::Vertex<FloatType>>*> vertices(triMeshPairs.size());
+		std::vector<const std::vector<typename TriMesh<FloatType>::template Vertex<FloatType>>*> vertices(triMeshPairs.size());
 		std::vector<const std::vector<vec3ui>*> indices(triMeshPairs.size());
 
 		m_VerticesCopy.resize(triMeshPairs.size());
@@ -81,16 +82,15 @@ public:
 	}
 
 protected:
-
-	std::vector<std::vector<typename TriMesh<FloatType>::Vertex<FloatType>> >			m_VerticesCopy;
-	std::vector<typename TriMesh<FloatType>::Triangle<FloatType>>						m_Triangles;
-	std::vector<typename TriMesh<FloatType>::Triangle<FloatType>*>						m_TrianglePointers;
+	std::vector<std::vector<typename ml::TriMesh<FloatType>::template Vertex<FloatType>>> m_VerticesCopy;
+	std::vector<typename TriMesh<FloatType>:: template Triangle<FloatType> >            m_Triangles;
+	std::vector<typename TriMesh<FloatType>:: template Triangle<FloatType>*>						m_TrianglePointers;
 
 private:
 
 	//! takes a vector of meshes: including vertices and indices
 	void createTrianglePointers(
-		const std::vector<const std::vector<typename TriMesh<FloatType>::Vertex<FloatType>>*>& verticesVec,
+		const std::vector<const std::vector<typename TriMesh<FloatType>::template Vertex<FloatType>>*>& verticesVec,
 		const std::vector<const std::vector<vec3ui>*>& indicesVec) 
 	{
 		//reserver memory
@@ -108,7 +108,7 @@ private:
 			//loop over tris within a mesh
 			for (size_t i = 0; i < indices.size(); i++) {
 				//generate triangle with triangle and mesh index
-				m_Triangles.push_back(typename TriMesh<FloatType>::Triangle<FloatType>(&vertices[indices[i].x], &vertices[indices[i].y], &vertices[indices[i].z], (unsigned int)i, (unsigned int)m));
+				m_Triangles.push_back(typename TriMesh<FloatType>::template Triangle<FloatType>(&vertices[indices[i].x], &vertices[indices[i].y], &vertices[indices[i].z], (unsigned int)i, (unsigned int)m));
 			}
 		}
 

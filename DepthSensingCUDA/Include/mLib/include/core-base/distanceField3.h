@@ -1,21 +1,24 @@
 #ifndef CORE_BASE_DISTANCE_FIELD3_H_
 #define CORE_BASE_DISTANCE_FIELD3_H_
 
+#include <core-base/grid3.h>
+#include <core-graphics/boundingBox3.h>
+
 namespace ml {
 
 	template<class FloatType>
 	class DistanceField3 : public Grid3<FloatType> {
 	public:
 
-        DistanceField3() : Grid3() {
+        DistanceField3() : Grid3<FloatType>() {
         }
 
-        DistanceField3(const BinaryGrid3& grid, FloatType trunc = std::numeric_limits<FloatType>::infinity()) : Grid3(grid.dimX(), grid.dimY(), grid.dimZ()) {
+        DistanceField3(const BinaryGrid3& grid, FloatType trunc = std::numeric_limits<FloatType>::infinity()) : Grid3<FloatType>(grid.dimX(), grid.dimY(), grid.dimZ()) {
             generateFromBinaryGrid(grid, trunc);
 		}
 
         void generateFromBinaryGrid(const BinaryGrid3& grid, FloatType trunc = std::numeric_limits<FloatType>::infinity()) {
-            allocate(grid.dimX(), grid.dimY(), grid.dimZ());
+            Grid3<FloatType>::allocate(grid.dimX(), grid.dimY(), grid.dimZ());
 
             m_truncation = trunc;
 
@@ -54,7 +57,7 @@ namespace ml {
 					for (size_t x = bbBox.getMinZ(); x < bbBox.getMaxX(); x++) {
 						point3d<FloatType> p = gridToDF * point3d<FloatType>((FloatType)x, (FloatType)y, (FloatType)z);
 						vec3ul pi(math::round(p));
-						if (isValidCoordinate(pi.x, pi.y, pi.z)) {
+						if (Grid3<FloatType>::isValidCoordinate(pi.x, pi.y, pi.z)) {
 							const FloatType& d = (*this)(pi.x, pi.y, pi.z);
 							if (d < m_truncation) {
 								if (squaredSum) {
@@ -109,16 +112,16 @@ namespace ml {
 			bool found = true;
 			while (found) {
 				found = false;
-				for (size_t z = 0; z < dimZ(); z++) {
-					for (size_t y = 0; y < dimY(); y++) {
-						for (size_t x = 0; x < dimX(); x++) {
+				for (size_t z = 0; z < Grid3<FloatType>::dimZ(); z++) {
+					for (size_t y = 0; y < Grid3<FloatType>::dimY(); y++) {
+						for (size_t x = 0; x < Grid3<FloatType>::dimX(); x++) {
 
 							FloatType dMin = (*this)(x, y, z);
 							for (int k = -1; k <= 1; k++) {
 								for (int j = -1; j <= 1; j++) {
 									for (int i = -1; i <= 1; i++) {
 										vec3ul n(x + i, y + j, z + k);
-										if (isValidCoordinate(n.x, n.y, n.z)) {
+										if (Grid3<FloatType>::isValidCoordinate(n.x, n.y, n.z)) {
 											FloatType dCurr = (*this)(n.x, n.y, n.z) + kernel[i+1][j+1][k+1];
 											if (dCurr < dMin && dCurr <= trunc) {
 												dMin = dCurr;
@@ -169,9 +172,9 @@ namespace ml {
 				FloatType dist;
 			};
 			std::priority_queue<Voxel> queue;
-			for (size_t z = 0; z < dimZ(); z++) {
-				for (size_t y = 0; y < dimY(); y++) {
-					for (size_t x = 0; x < dimX(); x++) {
+			for (size_t z = 0; z < Grid3<FloatType>::dimZ(); z++) {
+				for (size_t y = 0; y < Grid3<FloatType>::dimY(); y++) {
+					for (size_t x = 0; x < Grid3<FloatType>::dimX(); x++) {
 						if (!grid.isVoxelSet(x, y, z)) {
 							FloatType d;
 							if (isNeighborSet(grid, x, y, z, d)) {
@@ -199,7 +202,7 @@ namespace ml {
 								for (size_t i = 0; i < 3; i++) {
 									if (k == 1 && j == 1 && i == 1) continue;	//don't consider itself
 									vec3ul n(top.x - 1 + i, top.y - 1 + j, top.z - 1 + k);
-									if (isValidCoordinate(n.x, n.y, n.z) && !visited.isVoxelSet(n)) {
+									if (Grid3<FloatType>::isValidCoordinate(n.x, n.y, n.z) && !visited.isVoxelSet(n)) {
 										FloatType d = (point3d<FloatType>((FloatType)top.x, (FloatType)top.y, (FloatType)top.z) -
 													   point3d<FloatType>((FloatType)n.x, (FloatType)n.y, (FloatType)n.z)).length();
 										FloatType dToN = (*this)(top.x, top.y, top.z)+d;
@@ -227,7 +230,7 @@ namespace ml {
 					for (size_t i = 0; i < 3; i++) {
 						if (k == 1 && j == 1 && i == 1) continue;	//don't consider itself
 						vec3ul n(x - 1 + i, y - 1 + j, z - 1 + k);
-						if (isValidCoordinate(n.x, n.y, n.z)) {
+						if (Grid3<FloatType>::isValidCoordinate(n.x, n.y, n.z)) {
 							FloatType d = (point3d<FloatType>((FloatType)x, (FloatType)y, (FloatType)z) -
 											point3d<FloatType>((FloatType)n.x, (FloatType)n.y, (FloatType)n.z)).length();
 							FloatType dToN = (*this)(n.x, n.y, n.z)+d;

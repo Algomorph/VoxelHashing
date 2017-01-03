@@ -1,4 +1,8 @@
 
+#include <ext-lodepng/imageLoaderLodePNG.h>
+#include <ext-lodepng/lodepng.h>
+#include <mLibCore.h>
+
 namespace ml
 {
 

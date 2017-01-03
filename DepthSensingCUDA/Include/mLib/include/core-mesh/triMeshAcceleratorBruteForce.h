@@ -22,8 +22,8 @@ private:
 
 	//! interface definition
 	bool collisionInternal(const TriMeshAcceleratorBruteForce<FloatType>& accel) const {
-		if (triangleCount() > 0) {
-			for (const auto* triA : m_TrianglePointers)	{
+		if (TriMeshAccelerator<FloatType>::triangleCount() > 0) {
+			for (const auto* triA : TriMeshAccelerator<FloatType>::m_TrianglePointers)	{
 				for (const auto* triB : accel.m_TrianglePointers) {
 					if (intersection::intersectTriangleTriangle(
 						triA->getV0().position, triA->getV1().position, triA->getV2().position,
@@ -37,8 +37,8 @@ private:
 
     //! interface definition
     bool collisionTransformInternal(const TriMeshAcceleratorBruteForce<FloatType>& accel, const Matrix4x4<FloatType>& transform) const {
-        if (triangleCount() > 0) {
-            for (const auto* triA : m_TrianglePointers)	{
+        if (TriMeshAccelerator<FloatType>::triangleCount() > 0) {
+            for (const auto* triA : TriMeshAccelerator<FloatType>::m_TrianglePointers)	{
                 for (const auto* triB : accel.m_TrianglePointers) {
                     if (intersection::intersectTriangleTriangle(
                         triA->getV0().position, triA->getV1().position, triA->getV2().position,
@@ -60,13 +60,13 @@ private:
 
 
 	//! interface definition
-	typename const TriMesh<FloatType>::Triangle<FloatType>* intersectInternal(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const {
+	const typename TriMesh<FloatType>::template Triangle<FloatType>* intersectInternal(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const {
 
-		typename TriMesh<FloatType>::Triangle<FloatType>* tri = nullptr;
-		for (size_t i = 0; i < m_TrianglePointers.size(); i++) {
-			if (m_TrianglePointers[i]->intersect(r, t, u, v, tmin, tmax, onlyFrontFaces)) {
+		typename TriMesh<FloatType>::template Triangle<FloatType>* tri = nullptr;
+		for (size_t i = 0; i < TriMeshAccelerator<FloatType>::m_TrianglePointers.size(); i++) {
+			if (TriMeshAccelerator<FloatType>::m_TrianglePointers[i]->intersect(r, t, u, v, tmin, tmax, onlyFrontFaces)) {
 				tmax = t;
-				tri = m_TrianglePointers[i];
+				tri = TriMeshAccelerator<FloatType>::m_TrianglePointers[i];
 			}
 		}
 		return tri;

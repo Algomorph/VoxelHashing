@@ -75,7 +75,7 @@ public:
 
 	//! Returns the difference of two images (current - other)
 	BaseImage<T> operator-(const BaseImage<T> &other) const {
-		if (other.m_Width != m_Width || other.m_Height != m_Height)	throw EXCEPTION("Invalid image dimensions");
+		if (other.m_Width != m_Width || other.m_Height != m_Height)	throw std::exception("Invalid image dimensions");
 		BaseImage<T> im(m_Height, m_Width);
 		for (unsigned int i = 0; i < m_Height * m_Width; i++) {
 			im.m_Data[i] = m_Data[i] - other.m_Data[i];
@@ -84,7 +84,7 @@ public:
 	}
 	//! Returns the sum of two images (current + other)
 	BaseImage<T> operator+(const BaseImage<T> &other) const {
-		if (other.m_Width != m_Width || other.m_Height != m_Height)	throw EXCEPTION("Invalid image dimensions");
+		if (other.m_Width != m_Width || other.m_Height != m_Height)	throw std::exception("Invalid image dimensions");
 		BaseImage<T> im(m_Height, m_Width);
 		for (unsigned int i = 0; i < m_Height * m_Width; i++) {
 			im.m_Data[i] = m_Data[i] + other.m_Data[i];
@@ -252,7 +252,7 @@ public:
 
 	static void saveBinaryMImageArray(const std::string& filename, const std::vector<BaseImage<T>>& images) {
 		assert(images.size() >= 1);
-		void** data = new data*[images.size()];
+		void** data = malloc(sizeof(void *) * images.size());
 		for (unsigned int i = 0; i < images.size(); i++) {
 			assert(images[0].getWidth() == images[i].getWidth());
 			assert(images[0].getHeight() == images[i].getHeight());

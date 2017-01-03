@@ -19,20 +19,20 @@ public:
 
 	//! zoom
 	void moveModel(FloatType delta) {
-		m_modelTranslation += getLook() * delta;
+		m_modelTranslation += Camera<FloatType>::getLook() * delta;
 		update();
 	}
 	//! rotate
 	void rotateModel(const point2d<FloatType>& delta) {
-		m_modelRotation = mat4f::rotation(getUp(), delta.x) * mat4f::rotation(getRight(), delta.y) * m_modelRotation;
+		m_modelRotation = mat4f::rotation(Camera<FloatType>::getUp(), delta.x) * mat4f::rotation(Camera<FloatType>::getRight(), delta.y) * m_modelRotation;
 		update();
 	}
 	void rotateModelUp(FloatType delta) {
-		m_modelRotation = mat4f::rotation(getUp(), delta) * m_modelRotation;
+		m_modelRotation = mat4f::rotation(Camera<FloatType>::getUp(), delta) * m_modelRotation;
 		update();
 	}
 	void rotateModelRight(FloatType delta) {
-		m_modelRotation = mat4f::rotation(getRight(), delta) * m_modelRotation;
+		m_modelRotation = mat4f::rotation(Camera<FloatType>::getRight(), delta) * m_modelRotation;
 		update();
 	}
 
@@ -51,8 +51,8 @@ public:
 private:
 	void update() {
 		m_world = mat4f::translation(m_modelTranslation) * m_modelRotation;
-		m_worldView = camera() * m_world;
-		m_worldViewProj = perspective() * m_worldView;
+		m_worldView = Camera<FloatType>::camera() * m_world;
+		m_worldViewProj = Camera<FloatType>::perspective() * m_worldView;
 	}
 
 	point3d<FloatType> m_modelTranslation;

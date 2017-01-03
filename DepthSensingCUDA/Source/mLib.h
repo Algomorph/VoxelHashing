@@ -12,10 +12,10 @@
 //
 
 
-#include "mLib/include/mLibCore.h"
-#include "mLib/include/mLibDepthCamera.h"
-#include "mLib/include/mLibFreeImage.h"
-#include "mLib/include/mLibZLib.h"
+#include <mLibCore.h>
+#include <mLibDepthCamera.h>
+#include <mLibFreeImage.h>
+#include <mLibZLib.h>
 
 using namespace ml;
 

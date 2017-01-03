@@ -3,6 +3,7 @@
 #define CORE_GRAPHICS_BOUNDINGBOX2_H_
 
 #include "ray.h"
+#include <core-graphics/intersection.h>
 
 #include <cfloat>
 #include <vector>
@@ -133,7 +134,7 @@ namespace ml {
 
 		//! triangle collision
 		bool intersects(const point2d<FloatType>& p0, const point2d<FloatType>& p1, const point2d<FloatType>& p2) const {
-			return intersection::intersectTriangleABBB(minB, maxB, p0, p1, p2);
+			return intersection::intersectTriangleAABB(minB, maxB, p0, p1, p2);
 		}
 
 		//! bounding box collision

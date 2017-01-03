@@ -1,6 +1,11 @@
 #include <core-base/common.h>
 #include <mLibCore.h>
 
+#ifdef __linux__
+#include <sys/stat.h>
+
+#endif
+
 namespace ml {
 
 namespace util
@@ -309,6 +314,8 @@ namespace util
 #endif
 
 #ifdef LINUX
+
+
 	void copyStringToClipboard(const std::string &S)
 	{
 
@@ -319,7 +326,7 @@ namespace util
 		return "";
 	}
 
-	UINT getFileSize(const std::string &filename)
+	UINT64 getFileSize(const std::string &filename)
 	{
 		struct stat statbuf;
 		int success = stat(filename.c_str(), &statbuf);

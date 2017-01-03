@@ -78,6 +78,7 @@ template<class FloatType> class EigenSolverVTK;
 template<class FloatType> class EigenSolverNR;
 template<class FloatType> class EigenSolverEigen;	//warning: only works if eigen is included
 
+
 template<class FloatType> class EigenSolver
 {
 public:
@@ -87,18 +88,17 @@ public:
 		TYPE_NR = 2,
 		TYPE_EIGEN = 3	//warning: only works if eigen is included
 	};
+
     //type 0 -> VTK; type 1 -> NR
 	//TODO VS 2013
 	//template<SolverType solverType = TYPE_DEFAULT>
 	template<SolverType solverType>
 	static EigenSystem<FloatType> solve(const DenseMatrix<FloatType> &M) {
 		// (the tuple maps to indices)
-
-		std::tuple_element<solverType,
-				std::tuple<EigenSolverVTK<FloatType>,
-				EigenSolverVTK<FloatType>,
-				EigenSolverNR<FloatType>,
-				EigenSolverEigen<FloatType> > >::type solver;
+	    typename std::tuple_element<solverType,std::tuple<EigenSolverVTK<FloatType>,
+			    EigenSolverVTK<FloatType>,
+			    EigenSolverNR<FloatType>,
+			    EigenSolverEigen<FloatType>>>::type solver;
 		EigenSystem<FloatType> system = solver.eigenSystem(M);
 		if (solverType == TYPE_NR) {
 			system.sortByAbsValue();

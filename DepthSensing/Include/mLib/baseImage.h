@@ -3,7 +3,7 @@
 #define _BASEIMAGE_H_
 
 #include "baseImageHelper.h"
-
+#include <exception>
 namespace ml {
 
 template <class T>

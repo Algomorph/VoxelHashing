@@ -13,18 +13,18 @@ namespace ml {
 		// ********************************
 		// Vertex class of the Tri Mesh
 		// ********************************
-		template<class FloatType>
+		template<class VertexFloatType>
 		class Vertex {
 		public:
-			Vertex() : position(point3d<FloatType>::origin), normal(point3d<FloatType>::origin), color(point4d<FloatType>::origin), texCoord(point2d<FloatType>::origin) { }
-			Vertex(const point3d<FloatType>& _position) : position(_position) { }
-			Vertex(const point3d<FloatType>& _p, const point3d<FloatType>& _n) : position(_p), normal(_n) { }
-			Vertex(const point3d<FloatType>& _p, const point3d<FloatType>& _n, const point4d<FloatType>& _c, const point2d<FloatType>& _t) : position(_p), normal(_n), color(_c), texCoord(_t) { }
+			Vertex() : position(point3d<VertexFloatType>::origin), normal(point3d<VertexFloatType>::origin), color(point4d<VertexFloatType>::origin), texCoord(point2d<VertexFloatType>::origin) { }
+			Vertex(const point3d<VertexFloatType>& _position) : position(_position) { }
+			Vertex(const point3d<VertexFloatType>& _p, const point3d<VertexFloatType>& _n) : position(_p), normal(_n) { }
+			Vertex(const point3d<VertexFloatType>& _p, const point3d<VertexFloatType>& _n, const point4d<VertexFloatType>& _c, const point2d<VertexFloatType>& _t) : position(_p), normal(_n), color(_c), texCoord(_t) { }
 
-			Vertex operator*(FloatType t) const {
+			Vertex operator*(VertexFloatType t) const {
 				return Vertex(position*t, normal*t, color*t, texCoord*t);
 			}
-			Vertex operator/(FloatType t) const {
+			Vertex operator/(VertexFloatType t) const {
 				return Vertex(position/t, normal/t, color/t, texCoord/t);
 			}
 			Vertex operator+(const Vertex& other) const {
@@ -34,10 +34,10 @@ namespace ml {
 				return Vertex(position-other.position, normal-other.normal, color-other.color, texCoord-other.texCoord);
 			}
 
-			void operator*=(FloatType t) {
+			void operator*=(VertexFloatType t) {
 				*this = *this * t;
 			}
-			void operator/=(FloatType t) const {
+			void operator/=(VertexFloatType t) const {
 				*this = *this / t;
 			}
 			void operator+=(const Vertex& other) const {
@@ -48,12 +48,12 @@ namespace ml {
 			}
 
 			//
-			// If you change the order of these fields, you must update the layout fields in D3D11TriMesh::layout 
+			// If you change the order of these fields, you must update the layout fields in D3D11TriMesh::layout
 			//
-			point3d<FloatType> position;
-			point3d<FloatType> normal;
-			point4d<FloatType> color;
-			point2d<FloatType> texCoord;
+			point3d<VertexFloatType> position;
+			point3d<VertexFloatType> normal;
+			point4d<VertexFloatType> color;
+			point2d<VertexFloatType> texCoord;
 		private:
 		};
 		typedef Vertex<float> Vertexf;
@@ -62,68 +62,68 @@ namespace ml {
 		// ********************************
 		// Triangle class of the Tri Mesh
 		// ********************************
-		template<class FloatType>
+		template<class TriangleFloatType>
 		class Triangle {
 		public:
 
-			Triangle(const Vertex<FloatType> *v0, const Vertex<FloatType> *v1, const Vertex<FloatType> *v2, unsigned int triIdx = 0, unsigned int meshIdx = 0) {
+			Triangle(const Vertex<TriangleFloatType> *v0, const Vertex<TriangleFloatType> *v1, const Vertex<TriangleFloatType> *v2, unsigned int triIdx = 0, unsigned int meshIdx = 0) {
 				assert (v0 && v1 && v2);
 				this->v0 = v0;
 				this->v1 = v1;
 				this->v2 = v2;
-				m_Center = (v0->position + v1->position + v2->position)/(FloatType)3.0;
+				m_Center = (v0->position + v1->position + v2->position)/(TriangleFloatType)3.0;
 				m_TriangleIndex = triIdx;
 				m_MeshIndex = meshIdx;
 			}
 
 
-			Vertex<FloatType> getSurfaceVertex(FloatType u, FloatType v) const {
-				return *v0 *((FloatType)1.0 - u - v) + *v1 *u + *v2 *v;
+			Vertex<TriangleFloatType> getSurfaceVertex(TriangleFloatType u, TriangleFloatType v) const {
+				return *v0 *((TriangleFloatType)1.0 - u - v) + *v1 *u + *v2 *v;
 			}
-			point3d<FloatType> getSurfacePosition(FloatType u, FloatType v) const 	{
+			point3d<TriangleFloatType> getSurfacePosition(TriangleFloatType u, TriangleFloatType v) const 	{
 				return v0->position*((FloatType)1.0 - u - v) + v1->position*u + v2->position*v;
 			}
-			point4d<FloatType> getSurfaceColor(FloatType u, FloatType v) const {
-				return v0->color*((FloatType)1.0 - u - v) + v1->color*u + v2->color*v;
+			point4d<TriangleFloatType> getSurfaceColor(TriangleFloatType u, TriangleFloatType v) const {
+				return v0->color*((TriangleFloatType)1.0 - u - v) + v1->color*u + v2->color*v;
 			}
-			point3d<FloatType> getSurfaceNormal(FloatType u, FloatType v) const {
-				return v0->normal*((FloatType)1.0 - u - v) + v1->normal*u + v2->normal*v;
+			point3d<TriangleFloatType> getSurfaceNormal(TriangleFloatType u, TriangleFloatType v) const {
+				return v0->normal*((TriangleFloatType)1.0 - u - v) + v1->normal*u + v2->normal*v;
 			}
-			point2d<FloatType> getSurfaceTexCoord(FloatType u, FloatType v) const {
-				return v0->texCoord*((FloatType)1.0 - u - v) + v1->texCoord*u + v2->texCoord*v;
+			point2d<TriangleFloatType> getSurfaceTexCoord(TriangleFloatType u, TriangleFloatType v) const {
+				return v0->texCoord*((TriangleFloatType)1.0 - u - v) + v1->texCoord*u + v2->texCoord*v;
 			}
 
-			bool intersect(const Ray<FloatType> &r, FloatType& _t, FloatType& _u, FloatType& _v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool intersectOnlyFrontFaces = false) const {
+			bool intersect(const Ray<TriangleFloatType> &r, TriangleFloatType& _t, TriangleFloatType& _u, TriangleFloatType& _v, TriangleFloatType tmin = (TriangleFloatType)0, TriangleFloatType tmax = std::numeric_limits<TriangleFloatType>::max(), bool intersectOnlyFrontFaces = false) const {
 				return intersection::intersectRayTriangle(v0->position, v1->position, v2->position, r, _t, _u, _v, tmin, tmax, intersectOnlyFrontFaces);
 			}
 
-			bool intersects(const Triangle<FloatType>& other) const {
+			bool intersects(const Triangle<TriangleFloatType>& other) const {
 				return intersection::intersectTriangleTriangle(v0->position,v1->position,v2->position, other.v0->position,other.v1->position,other.v2->position);
 			}
 
-			void includeInBoundingBox(BoundingBox3<FloatType> &bb) const {
+			void includeInBoundingBox(BoundingBox3<TriangleFloatType> &bb) const {
 				bb.include(v0->position);
 				bb.include(v1->position);
 				bb.include(v2->position);
 			}
 
-			BoundingBox3<FloatType> getBoundingBox() const {
-				BoundingBox3<FloatType> bb;
+			BoundingBox3<TriangleFloatType> getBoundingBox() const {
+				BoundingBox3<TriangleFloatType> bb;
 				includeInBoundingBox(bb);
 				return bb;
 			}
 
-			const point3d<FloatType>& getCenter() const {
+			const point3d<TriangleFloatType>& getCenter() const {
 				return m_Center;
 			}
 
-			const Vertex<FloatType>& getV0() const {
+			const Vertex<TriangleFloatType>& getV0() const {
 				return *v0;
 			}
-			const Vertex<FloatType>& getV1() const {
+			const Vertex<TriangleFloatType>& getV1() const {
 				return *v1;
 			}
-			const Vertex<FloatType>& getV2() const {
+			const Vertex<TriangleFloatType>& getV2() const {
 				return *v2;
 			}
 
@@ -135,8 +135,8 @@ namespace ml {
 			}
 
 		private:
-			const Vertex<FloatType> *v0, *v1, *v2;			
-			point3d<FloatType> m_Center;	//TODO check if we want to store the center
+			const Vertex<TriangleFloatType> *v0, *v1, *v2;
+			point3d<TriangleFloatType> m_Center;	//TODO check if we want to store the center
 			unsigned int m_TriangleIndex;	//! 0-based triangle index within it's mesh 
 			unsigned int m_MeshIndex;		//! 0-based mesh index; used for accelerators that take an std::vector of triMeshes 
 		};

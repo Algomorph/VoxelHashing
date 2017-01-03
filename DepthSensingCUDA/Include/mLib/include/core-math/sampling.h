@@ -1,6 +1,12 @@
 #ifndef _CORE_SAMPLING_H_
 #define _CORE_SAMPLING_H_
 
+#ifndef INV_TWOPI
+	#define INV_TWOPI 0.1591549430918953357689
+#endif
+
+#include <cmath>
+
 namespace ml {
 
 	//from mutsuba and prt
@@ -128,7 +134,7 @@ namespace ml {
 		}
 
 		static inline FloatType squareToStdNormalPdf(const point2d<FloatType> &pos) {
-			return INV_TWOPI * math::fastexp(-(pos.x*pos.x + pos.y*pos.y)/2.0f);
+			return INV_TWOPI * std::exp(-(pos.x*pos.x + pos.y*pos.y)/2.0f);
 		}
 
 		static inline FloatType intervalToTent(FloatType sample) {

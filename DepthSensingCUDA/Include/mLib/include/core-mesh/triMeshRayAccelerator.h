@@ -24,7 +24,7 @@ public:
 			return triangle != nullptr;
 		}
 		
-		typename TriMesh<FloatType>::Vertex<FloatType> getSurfaceVertex() const {
+		typename TriMesh<FloatType>::template Vertex<FloatType> getSurfaceVertex() const {
 			return triangle->getSurfaceVertex(u,v);
 		}
 		point3d<FloatType> getSurfacePosition() const {
@@ -48,11 +48,11 @@ public:
 		}
 
 		FloatType t, u, v;	
-		const typename TriMesh<FloatType>::Triangle<FloatType>* triangle;
+		const typename TriMesh<FloatType>::template Triangle<FloatType>* triangle;
     };
 
 
-	typename const TriMesh<FloatType>::Triangle<FloatType>* intersect(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const {
+	const typename  TriMesh<FloatType>::template Triangle<FloatType>* intersect(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const {
 		return intersectInternal(r, t, u, v, tmin, tmax, onlyFrontFaces);
 	}
 
@@ -158,7 +158,7 @@ public:
 
 private:
 
-	virtual typename const TriMesh<FloatType>::Triangle<FloatType>* intersectInternal(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const = 0;
+	virtual const typename TriMesh<FloatType>::template Triangle<FloatType>* intersectInternal(const Ray<FloatType>& r, FloatType& t, FloatType& u, FloatType& v, FloatType tmin = (FloatType)0, FloatType tmax = std::numeric_limits<FloatType>::max(), bool onlyFrontFaces = false) const = 0;
 
 };
 

@@ -1,69 +1,20 @@
 #ifndef _BASEIMAGE_HELPER_H_
 #define _BASEIMAGE_HELPER_H_
 
+#ifdef __GNUC__
+	#define __forceinline __attribute__((always_inline))
+#endif
+
+#include <core-math/point3d.h>
+#include <core-math/point4d.h>
+
 namespace ml {
 
 class BaseImageHelper {
 public:
 	
-	template<class T, class S> 
+	template<class T, class S>
 	__forceinline static void convertBaseImagePixel(T& out, const S& in);
-
-	template<> __forceinline static void convertBaseImagePixel<vec3f, vec3uc>(vec3f& out, const vec3uc& in) {
-		out.x = in.x / 255.0f;
-		out.y = in.y / 255.0f;
-		out.z = in.z / 255.0f;
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec3uc, vec3f>(vec3uc& out, const vec3f& in) {
-		out.x = (unsigned char)(in.x * 255);
-		out.y = (unsigned char)(in.y * 255);
-		out.z = (unsigned char)(in.z * 255);
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec4f, vec4uc>(vec4f& out, const vec4uc& in) {
-		out.x = in.x / 255.0f;
-		out.y = in.y / 255.0f;
-		out.z = in.z / 255.0f;
-		out.w = in.w / 255.0f;
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec4uc, vec4f>(vec4uc& out, const vec4f& in) {
-		out.x = (unsigned char)(in.x * 255);
-		out.y = (unsigned char)(in.y * 255);
-		out.z = (unsigned char)(in.z * 255);
-		out.w = (unsigned char)(in.w * 255);
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec3f, float>(vec3f& out, const float& in) {
-		out = convertDepthToRGB(in);
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec3uc, float>(vec3uc& out, const float& in) {
-		vec3f tmp = convertDepthToRGB(in);
-		convertBaseImagePixel(out, tmp);
-	}
-	template<> __forceinline static void convertBaseImagePixel<vec4f, float>(vec4f& out, const float& in) {
-		out = vec4f(convertDepthToRGB(in), 1.0f);
-		out.w = 0.0f;
-	}
-
-	template<> __forceinline static void convertBaseImagePixel<vec4uc, float>(vec4uc& out, const float& in) {
-		vec4f tmp = convertDepthToRGB(in);
-		convertBaseImagePixel(out, tmp);
-	}
-
-
-
-	template<> __forceinline static void convertBaseImagePixel<vec3uc, vec4uc>(vec3uc& out, const vec4uc& in) {
-		out.x = in.x;
-		out.y = in.y;
-		out.z = in.z;
-	}
-
-
-
-
 
 	__forceinline static vec3f convertHSVtoRGB(const vec3f& hsv) {
 		float H = hsv[0];
@@ -118,6 +69,60 @@ public:
 	}
 
 };
+
+	template<>
+	__forceinline void BaseImageHelper::convertBaseImagePixel<vec3f, vec3uc>(vec3f& out, const vec3uc& in) {
+		out.x = in.x / 255.0f;
+		out.y = in.y / 255.0f;
+		out.z = in.z / 255.0f;
+	}
+
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec3uc, vec3f>(vec3uc& out, const vec3f& in) {
+		out.x = (unsigned char)(in.x * 255);
+		out.y = (unsigned char)(in.y * 255);
+		out.z = (unsigned char)(in.z * 255);
+	}
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec4f, vec4uc>(vec4f& out, const vec4uc& in) {
+		out.x = in.x / 255.0f;
+		out.y = in.y / 255.0f;
+		out.z = in.z / 255.0f;
+		out.w = in.w / 255.0f;
+	}
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec4uc, vec4f>(vec4uc& out, const vec4f& in) {
+		out.x = (unsigned char)(in.x * 255);
+		out.y = (unsigned char)(in.y * 255);
+		out.z = (unsigned char)(in.z * 255);
+		out.w = (unsigned char)(in.w * 255);
+	}
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec3f, float>(vec3f& out, const float& in) {
+		out = convertDepthToRGB(in);
+	}
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec3uc, float>(vec3uc& out, const float& in) {
+		vec3f tmp = convertDepthToRGB(in);
+		convertBaseImagePixel(out, tmp);
+	}
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec4f, float>(vec4f& out, const float& in) {
+		out = vec4f(convertDepthToRGB(in), 1.0f);
+		out.w = 0.0f;
+	}
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec4uc, float>(vec4uc& out, const float& in) {
+		vec4f tmp = vec4f(convertDepthToRGB(in),1.0f);
+		convertBaseImagePixel(out, tmp);
+	}
+
+
+	template<> __forceinline void BaseImageHelper::convertBaseImagePixel<vec3uc, vec4uc>(vec3uc& out, const vec4uc& in) {
+		out.x = in.x;
+		out.y = in.y;
+		out.z = in.z;
+	}
+
 
 } // namespace ml
 

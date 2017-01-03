@@ -2,7 +2,11 @@
 #ifndef CORE_GRAPHICS_INTERSECTION_H_
 #define CORE_GRAPHICS_INTERSECTION_H_
 
+#include <core-graphics/line2.h>
+#include <core-graphics/triangle.h>
+
 namespace ml {
+
 
 namespace intersection {
 

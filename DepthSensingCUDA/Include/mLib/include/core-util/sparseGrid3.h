@@ -2,18 +2,23 @@
 #ifndef CORE_UTIL_SPARSEGRID3D_H_
 #define CORE_UTIL_SPARSEGRID3D_H_
 
-template<>
-struct std::hash<ml::vec3i> : public std::unary_function<ml::vec3i, size_t> {
-	size_t operator()(const ml::vec3i& v) const {
-		//TODO larger prime number (64 bit) to match size_t
-		const size_t p0 = 73856093;
-		const size_t p1 = 19349669;
-		const size_t p2 = 83492791;
-		const size_t res = ((size_t)v.x * p0)^((size_t)v.y * p1)^((size_t)v.z * p2);
-		return res;
-	}
-};
+#include <functional>
+#include <core-math/point3d.h>
 
+namespace std{
+	template<typename T> struct hash;
+	template<>
+	struct hash<ml::vec3i> : public unary_function<ml::vec3i, size_t>{
+		size_t operator()(const ml::vec3i& v) const {
+			//TODO larger prime number (64 bit) to match size_t
+			const size_t p0 = 73856093;
+			const size_t p1 = 19349669;
+			const size_t p2 = 83492791;
+			const size_t res = ((size_t)v.x * p0)^((size_t)v.y * p1)^((size_t)v.z * p2);
+			return res;
+		}
+	};
+}//end namespace std
 namespace ml {
 
 template<class T> class SparseGrid3;
@@ -73,12 +78,20 @@ public:
 
 #ifdef _WIN32
 	template<class U, class V, class W>
-#endif
 	friend BinaryDataStream<U,V>& operator>> <>(BinaryDataStream<U,V>& s, SparseGrid3<T>& g);
+#else
+	template<class U, class V, class W>
+	friend BinaryDataStream<U,V>& operator>> (BinaryDataStream<U,V>& s, SparseGrid3<T>& g);
+#endif
+
 #ifdef _WIN32
 	template<class U, class V, class W>
-#endif
 	friend BinaryDataStream<U,V>& operator<< <>(BinaryDataStream<U,V>& s, const SparseGrid3<T>& g);
+#else
+	template<class U, class V, class W>
+	friend BinaryDataStream<U,V>& operator<< (BinaryDataStream<U,V>& s, const SparseGrid3<T>& g);
+#endif
+
 
 
 

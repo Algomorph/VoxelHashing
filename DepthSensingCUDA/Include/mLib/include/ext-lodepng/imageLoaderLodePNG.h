@@ -1,6 +1,11 @@
 #ifndef _EXT_LODEPNG_IMAGELOADERLODEPNG_H_
 #define _EXT_LODEPNG_IMAGELOADERLODEPNG_H_
 
+
+#include <core-graphics/RGBColor.h>
+
+#include <string>
+
 namespace ml {
 
 class LodePNG

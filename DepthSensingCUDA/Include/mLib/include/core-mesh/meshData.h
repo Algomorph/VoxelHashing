@@ -1,6 +1,8 @@
 #ifndef CORE_MESH_MESHDATA_H_
 #define CORE_MESH_MESHDATA_H_
 
+
+
 namespace ml {
 
 
@@ -604,8 +606,7 @@ public:
 				unsigned int cnt = 0;
 				for (size_t j = m_MaterialIndices[i].start; j < m_MaterialIndices[i].end; j++) {
 					meshData.m_FaceIndicesVertices.push_back(getFaceIndicesVertices()[j]);
-					Indices::Face& face = meshData.m_FaceIndicesVertices.back();				
-					for (auto& idx : face) {
+					for (auto& idx : meshData.m_FaceIndicesVertices.back()) {
 						if (_map.find(idx) != _map.end()) {
 							idx = _map[idx];	//set to new idx, which already exists
 						} else {
@@ -626,8 +627,8 @@ public:
 				unsigned int cnt = 0;
 				for (size_t j = m_MaterialIndices[i].start; j < m_MaterialIndices[i].end; j++) {
 					meshData.m_FaceIndicesColors.push_back(getFaceIndicesColors()[j]);
-					Indices::Face& face = meshData.m_FaceIndicesColors.back();				
-					for (auto& idx : face) {
+					//Indices::Face& face = meshData.m_FaceIndicesColors.back();
+					for (auto& idx : meshData.m_FaceIndicesColors.back()) {
 						if (_map.find(idx) != _map.end()) {
 							idx = _map[idx];	//set to new idx, which already exists
 						} else {
@@ -644,8 +645,7 @@ public:
 				unsigned int cnt = 0;
 				for (size_t j = m_MaterialIndices[i].start; j < m_MaterialIndices[i].end; j++) {
 					meshData.m_FaceIndicesNormals.push_back(getFaceIndicesNormals()[j]);
-					Indices::Face& face = meshData.m_FaceIndicesNormals.back();				
-					for (auto& idx : face) {
+					for (auto& idx : meshData.m_FaceIndicesNormals.back()) {
 						if (_map.find(idx) != _map.end()) {
 							idx = _map[idx];	//set to new idx, which already exists
 						} else {
@@ -662,8 +662,7 @@ public:
 				unsigned int cnt = 0;
 				for (size_t j = m_MaterialIndices[i].start; j < m_MaterialIndices[i].end; j++) {
 					meshData.m_FaceIndicesTextureCoords.push_back(getFaceIndicesTexCoords()[j]);
-					Indices::Face& face = meshData.m_FaceIndicesTextureCoords.back();				
-					for (auto& idx : face) {
+					for (auto& idx : meshData.m_FaceIndicesTextureCoords.back()) {
 						if (_map.find(idx) != _map.end()) {
 							idx = _map[idx];	//set to new idx, which already exists
 						} else {

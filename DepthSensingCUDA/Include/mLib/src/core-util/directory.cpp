@@ -57,6 +57,9 @@ void Directory::load(const std::string &path)
 #endif  // _WIN32
 
 #ifdef LINUX
+#include <sys/types.h>
+#include <dirent.h>
+
 void Directory::load(const std::string &path)
 {
 	m_path = path + "\\";

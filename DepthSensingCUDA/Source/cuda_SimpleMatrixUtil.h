@@ -3,6 +3,7 @@
 #ifndef _CUDA_SIMPLE_MATRIX_UTIL_
 #define _CUDA_SIMPLE_MATRIX_UTIL_
 
+
 #define MINF __int_as_float(0xff800000)
 #define INF  __int_as_float(0x7f800000)
 

@@ -2,6 +2,9 @@
 #ifndef CORE_BASE_BINARY_GRID3D_H_
 #define CORE_BASE_BINARY_GRID3D_H_
 
+#include <boost/serialization/array.hpp>
+#include <boost/serialization/access.hpp>
+
 namespace ml {
 
 
