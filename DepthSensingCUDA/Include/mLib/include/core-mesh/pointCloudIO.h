@@ -263,6 +263,6 @@ typedef PointCloudIO<double> PointCloudIOd;
 } //namespace ml
 
 
-#include "pointCloudIO.cpp"
+#include "pointCloudIO.tpp"
 
 #endif

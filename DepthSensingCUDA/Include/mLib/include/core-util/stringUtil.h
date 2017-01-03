@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <core-math/rng.h>
 
 namespace ml
 {

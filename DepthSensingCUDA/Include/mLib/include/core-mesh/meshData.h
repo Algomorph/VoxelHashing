@@ -745,7 +745,7 @@ typedef MeshData<double>	MeshDatad;
 
 } // namespace ml
 
-#include "meshData.cpp"
+#include "meshData.tpp"
 
 #endif  // CORE_MESH_MESHDATA_H_
 

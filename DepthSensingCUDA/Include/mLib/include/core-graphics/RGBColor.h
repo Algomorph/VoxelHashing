@@ -1,6 +1,9 @@
 #ifndef CORE_GRAPHICS_RGBCOLOR_H_
 #define CORE_GRAPHICS_RGBCOLOR_H_
 
+#include <core-base/common.h>
+#include <core-math/point3d.h>
+#include <core-math/point4d.h>
 namespace ml
 {
 

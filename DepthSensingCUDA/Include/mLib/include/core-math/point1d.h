@@ -2,10 +2,15 @@
 #ifndef CORE_MATH_POINT1D_H_
 #define CORE_MATH_POINT1D_H_
 
+//stdlib
 #include <iostream>
 #include <cmath>
 #include <iostream>
 #include <cassert>
+
+//util
+#include <core-util/binaryDataSerialize.h>
+#include <core-base/console.h>
 
 namespace ml {
 

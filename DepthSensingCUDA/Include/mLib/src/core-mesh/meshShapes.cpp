@@ -1,3 +1,5 @@
+#include <mLibCore.h>
+
 namespace ml {
 
 namespace shapes {

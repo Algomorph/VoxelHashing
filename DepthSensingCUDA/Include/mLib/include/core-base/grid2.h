@@ -199,6 +199,6 @@ typedef Grid2<double> Grid2d;
 
 }
 
-#include "grid2.cpp"
+#include "grid2.tpp"
 
 #endif  // CORE_BASE_GRID2D_H_

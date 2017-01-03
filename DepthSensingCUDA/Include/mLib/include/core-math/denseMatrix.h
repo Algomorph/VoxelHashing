@@ -2,7 +2,23 @@
 #ifndef CORE_MATH_DENSEMATRIX_H_
 #define CORE_MATH_DENSEMATRIX_H_
 
+#include <core-math/mathVector.h>
+#include <core-math/sparseMatrix.h>
+
+
+
 namespace ml {
+
+	template <class FloatType>
+	class Matrix2x2;
+	template <class FloatType>
+	class Matrix3x3;
+	template <class FloatType>
+	class Matrix4x4;
+
+	template<class FloatType>
+	struct EigenSystem;
+	template<class FloatType> class EigenSolver;
 
 template <class T> class DenseMatrix
 {
@@ -313,6 +329,6 @@ typedef DenseMatrix<double> DenseMatrixd;
 
 }  // namespace ml
 
-#include "denseMatrix.cpp"
+#include "denseMatrix.tpp"
 
 #endif  // CORE_MATH_DENSEMATRIX_H_

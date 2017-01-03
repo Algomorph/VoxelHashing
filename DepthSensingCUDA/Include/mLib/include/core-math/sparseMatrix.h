@@ -252,6 +252,6 @@ SparseMatrix<FloatType> operator * (const SparseMatrix<FloatType> &A, FloatType 
 
 }  // namespace ml
 
-#include "sparseMatrix.cpp"
+#include "sparseMatrix.tpp"
 
 #endif  // CORE_MATH_SPARSEMATRIX_H_

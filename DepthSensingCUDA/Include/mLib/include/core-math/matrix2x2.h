@@ -2,12 +2,15 @@
 #ifndef CORE_MATH_MATRIX2X2_H_
 #define CORE_MATH_MATRIX2X2_H_
 
+
 namespace ml {
 
 template <class FloatType>
 class DenseMatrix;
 template <class FloatType>
 struct EigenSystem;
+template<class FloatType>
+class EigenSolver;
 
 //! This class provides functions to handle 3-dimensional matrices
 /*! The arrangement of the matrix is row-like.

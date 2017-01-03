@@ -1,4 +1,4 @@
-
+#include <mLibCore.h>
 //
 // In a multi-window world, s_windowMap would be needed.  In a single-window world, s_mainWindow is sufficient.
 //

@@ -542,6 +542,6 @@ namespace ml {
 
 }  // namespace ml
 
-#include "triMesh.cpp"
+#include "triMesh.tpp"
 
 #endif  // INCLUDE_CORE_MESH_TRIMESH_H_

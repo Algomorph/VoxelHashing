@@ -149,6 +149,6 @@ typedef Grid3<double> Grid3d;
 
 }  // namespace ml
 
-#include "grid3.cpp"
+#include "grid3.tpp"
 
 #endif  // CORE_BASE_GRID3D_H_

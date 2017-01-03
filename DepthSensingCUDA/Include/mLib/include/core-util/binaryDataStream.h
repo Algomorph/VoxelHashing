@@ -7,6 +7,17 @@
 #define UINT64 uint64_t
 #endif
 
+#include <string>
+
+#include <core-base/common.h>
+
+#include <core-util/binaryDataCompressor.h>
+#include <core-util/binaryDataStream.h>
+#include <core-util/binaryDataBuffer.h>
+
+#include <core-base/grid2.h>
+#include <core-base/grid3.h>
+
 namespace ml
 {
 

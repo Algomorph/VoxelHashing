@@ -59,6 +59,6 @@ typedef Polygon<double> Polygond;
 
 }  // namespace ml
 
-#include "polygon.cpp"
+#include "polygon.tpp"
 
 #endif  // CORE_GRAPHICS_POLYGON_H_

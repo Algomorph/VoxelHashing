@@ -1,4 +1,6 @@
 
+#include <core-math/point3d.h>
+
 namespace ml {
 
 //

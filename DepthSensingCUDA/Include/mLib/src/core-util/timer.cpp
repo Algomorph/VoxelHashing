@@ -1,4 +1,9 @@
 
+#include <mLibCore.h>
+#ifdef LINUX
+	#include <sys/time.h>
+#endif
+
 namespace ml {
 
 	//! returns the time in seconds

@@ -85,6 +85,6 @@ typedef Camera<double> Camerad;
 
 }  // namespace ml
 
-#include "camera.cpp"
+#include "camera.tpp"
 
 #endif  // CORE_GRAPHICS_CAMERA_H_

@@ -2,6 +2,9 @@
 #ifndef CORE_BASE_CONSOLE_H_
 #define CORE_BASE_CONSOLE_H_
 
+#include <iostream>
+#include <core-base/common.h>
+
 namespace ml
 {
 

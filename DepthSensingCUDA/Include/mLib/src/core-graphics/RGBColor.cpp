@@ -1,4 +1,9 @@
 
+#include <core-graphics/RGBColor.h>
+#include <core-base/common.h>
+#include <core-math/point3d.h>
+#include <core-math/point4d.h>
+
 namespace ml
 {
 

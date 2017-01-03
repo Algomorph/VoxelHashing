@@ -2,6 +2,8 @@
 #ifndef CORE_MATH_RNG_H_
 #define CORE_MATH_RNG_H_
 
+#include <core-math/point2d.h>
+
 // __________________________________________________________________________
 // rng.h - a Random Number Generator Class
 // rng.C - contains the non-inline class methods

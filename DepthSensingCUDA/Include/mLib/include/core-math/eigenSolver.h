@@ -2,6 +2,9 @@
 #ifndef CORE_MATH_EIGENSOLVER_H_
 #define CORE_MATH_EIGENSOLVER_H_
 
+#include <core-math/denseMatrix.h>
+#include <tuple>
+
 namespace ml {
 
 //
@@ -90,7 +93,12 @@ public:
 	template<SolverType solverType>
 	static EigenSystem<FloatType> solve(const DenseMatrix<FloatType> &M) {
 		// (the tuple maps to indices)
-		std::tuple_element<solverType, std::tuple<EigenSolverVTK<FloatType>, EigenSolverVTK<FloatType>, EigenSolverNR<FloatType>, EigenSolverEigen<FloatType> > >::type solver;
+
+		std::tuple_element<solverType,
+				std::tuple<EigenSolverVTK<FloatType>,
+				EigenSolverVTK<FloatType>,
+				EigenSolverNR<FloatType>,
+				EigenSolverEigen<FloatType> > >::type solver;
 		EigenSystem<FloatType> system = solver.eigenSystem(M);
 		if (solverType == TYPE_NR) {
 			system.sortByAbsValue();

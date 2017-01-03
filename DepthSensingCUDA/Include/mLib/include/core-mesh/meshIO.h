@@ -104,6 +104,6 @@ typedef MeshIO<double>	MeshIOd;
 
 }  // namespace ml
 
-#include "meshIO.cpp"
+#include "meshIO.tpp"
 
 #endif  // CORE_MESH_MESHIO_H_

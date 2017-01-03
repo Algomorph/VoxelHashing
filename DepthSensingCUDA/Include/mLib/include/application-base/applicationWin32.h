@@ -1,4 +1,4 @@
-
+#include <core-math/point2d.h>
 #ifndef APPLICATION_BASE_APPLICATIONWIN32_H_
 #define APPLICATION_BASE_APPLICATIONWIN32_H_
 

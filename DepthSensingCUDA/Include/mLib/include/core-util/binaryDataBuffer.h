@@ -7,6 +7,8 @@
 #include <fstream>
 #include <string>
 
+#include <core-util/utility.h>
+
 namespace ml
 {
 

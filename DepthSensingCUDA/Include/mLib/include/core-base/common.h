@@ -30,7 +30,9 @@
 
 #endif
 
-#ifdef LINUX
+#ifdef __linux__
+
+#include <cassert>
 #define DEBUG_BREAK assert(false)
 #endif
 
@@ -181,7 +183,7 @@ typedef int64_t INT64;
 #endif
 
 #ifndef UINT32
-#ifdef WIN32
+#ifdef _WIN32
 typedef unsigned __int32 UINT32;
 #else
 typedef uint32_t UINT32;
