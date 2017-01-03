@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Eigen.h"
-#include "d3dx9math.h"
+#ifdef _WIN32
+	#include "d3dx9math.h"
+#endif
 #include "cuda_SimpleMatrixUtil.h"
 
 namespace MatrixConversion

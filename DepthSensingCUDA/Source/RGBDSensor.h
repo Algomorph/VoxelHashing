@@ -1,9 +1,13 @@
 #pragma once
 
-#include <windows.h>
+#ifdef _WIN32
+	#include <windows.h>
+#endif
 #include <cassert>
 #include "Eigen.h"
-#include <d3dx9math.h>
+#ifdef _WIN32
+	#include <d3dx9math.h>
+#endif
 
 #include "mLib.h"
 

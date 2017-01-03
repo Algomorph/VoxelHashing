@@ -4,7 +4,7 @@
 /* Global App state for camera tracking: reads and stores all tracking parameters  */
 /***********************************************************************************/
 
-#include "DXUT.h"
+//#include "DXUT.h"
 
 #include "stdafx.h"
 

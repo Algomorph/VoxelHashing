@@ -1,8 +1,10 @@
 #pragma once
 
 #include <cuda_runtime.h>
+#ifdef _WIN32
 #include <cuda_d3d11_interop.h>
-#include "../../cudaUtil.h"
+#endif
+#include "cudaUtil.h"
 
 class CUDAScan
 {

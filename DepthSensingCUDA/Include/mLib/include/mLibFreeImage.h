@@ -1,7 +1,7 @@
 //
 // external FreeImage headers
 //
-#include "FreeImage/FreeImage.h"
+#include <FreeImage.h>
 //#include <wchar.h>
 
 //

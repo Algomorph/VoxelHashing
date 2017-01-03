@@ -2,6 +2,11 @@
 #ifndef CORE_UTIL_BINARYDATASTREAM_H_
 #define CORE_UTIL_BINARYDATASTREAM_H_
 
+#ifndef _WIN32
+#include <cstdint>
+#define UINT64 uint64_t
+#endif
+
 namespace ml
 {
 

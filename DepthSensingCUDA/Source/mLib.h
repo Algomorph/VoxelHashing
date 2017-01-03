@@ -15,7 +15,7 @@
 #include "mLib/include/mLibCore.h"
 #include "mLib/include/mLibDepthCamera.h"
 #include "mLib/include/mLibFreeImage.h"
-#include "mLib/include/mLibZlib.h"
+#include "mLib/include/mLibZLib.h"
 
 using namespace ml;
 

@@ -173,7 +173,7 @@ typedef unsigned char UCHAR;
 #endif
 
 #ifndef INT64
-#ifdef WIN32
+#ifdef _WIN32
 typedef __int64 INT64;
 #else
 typedef int64_t INT64;

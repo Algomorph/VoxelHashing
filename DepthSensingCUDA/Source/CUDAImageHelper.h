@@ -2,8 +2,10 @@
 
 #include "stdafx.h"
 
+#ifdef _WIN32
 #include <D3D11.h>
 #include "DX11Utils.h"
+#endif
 #include "TimingLog.h"
 #include "Eigen.h"
 #include "DepthCameraUtil.h"
