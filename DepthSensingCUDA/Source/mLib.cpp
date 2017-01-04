@@ -1,4 +1,4 @@
 
 #include "mLib.h"
 
-#include "mlib/include/mLibCore.cpp"
+#include "mLibCore.cpp"

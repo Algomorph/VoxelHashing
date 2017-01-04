@@ -7,11 +7,12 @@
 //#include "DXUT.h"
 
 #include "stdafx.h"
+#include <cstdint>
 
 #include <vector>
 
 #define X_GLOBAL_CAMERA_APP_STATE_FIELDS \
-	X(unsigned int, s_maxLevels) \
+	X(uint32_t, s_maxLevels) \
 	X(std::vector<unsigned int>, s_maxOuterIter) \
 	X(std::vector<unsigned int>, s_maxInnerIter) \
 	X(std::vector<float>, s_weightsDepth) \
@@ -80,7 +81,9 @@ class GlobalCameraTrackingState
 		//! reads all the members from the given parameter file (could be called for reloading)
 		void readMembers() {
 #define X(type, name) \
-	if (!s_ParameterFile.readParameter(std::string(#name), name)) {MLIB_WARNING(std::string(#name).append(" ").append("uninitialized"));	name = type();}
+			if (!s_ParameterFile.readParameter(std::string(#name), name)) { \
+				MLIB_WARNING(std::string(#name).append(" ").append("uninitialized"));	name = type();\
+			}
 			X_GLOBAL_CAMERA_APP_STATE_FIELDS
 #undef X
 		}

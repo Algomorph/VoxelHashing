@@ -1,8 +1,11 @@
 #ifndef __STDOUTPUTLOGGER__H__
 #define __STDOUTPUTLOGGER__H__
 
+
+#ifdef WIN32
 #include <windows.h>
 #include <Wincon.h>
+#endif
 
 class StdOutputLogger
 {

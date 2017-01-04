@@ -10,11 +10,11 @@
 
 namespace stb {
 	#define STB_IMAGE_IMPLEMENTATION
-#include "SensorData/stb_image.h"
+#include "sensorData/stb_image.h"
 	#undef STB_IMAGE_IMPLEMENTATION
 
 	#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "SensorData/stb_image_write.h"
+#include "sensorData/stb_image_write.h"
 	#undef STB_IMAGE_WRITE_IMPLEMENTATION
 }
 

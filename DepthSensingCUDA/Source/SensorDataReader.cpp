@@ -16,8 +16,11 @@
 #include <vector>
 #include <string>
 
-#include <conio.h>
-
+#ifdef _WIN32
+#include <conio.h
+#else
+#include <curses.h>
+#endif
 SensorDataReader::SensorDataReader()
 {
 	m_numFrames = 0;

@@ -2,7 +2,7 @@
 #define _BASEIMAGE_HELPER_H_
 
 #ifdef __GNUC__
-	#define __forceinline __attribute__((always_inline))
+	#define __forceinline inline //__attribute__((always_inline))
 #endif
 
 #include <core-math/point3d.h>

@@ -1,10 +1,12 @@
 ﻿#pragma once
 
-#include <windows.h>
-#include <d3d11.h>
-#include <xnamath.h>
-#include "DX11Utils.h"
-#include "resource.h"
+#ifdef WIN32
+	#include <windows.h>
+	#include <d3d11.h>
+	#include <xnamath.h>
+	#include "DX11Utils.h"
+	#include "resource.h"
+#endif
 
 #include "GlobalAppState.h"
 #include "GlobalCameraTrackingState.h"
@@ -20,12 +22,13 @@
 #include "IntelSensor.h"
 #include "RealSenseSensor.h"
 
-
+#ifdef WIN32
 #include "DXUT.h"
 #include "DXUTcamera.h"
 #include "DXUTgui.h"
 #include "DXUTsettingsDlg.h"
 #include "SDKmisc.h"
+#endif
 
 #include "DX11RGBDRenderer.h"
 #include "DX11QuadDrawer.h"
