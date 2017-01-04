@@ -102,10 +102,15 @@
 #endif
 
 #define checkSizeArray(a, d)( (((sizeof a)/(sizeof a[0])) >= d))
-
+/**
+ * Holds th current state of the depth sensing application
+ */
 class GlobalAppState
 {
 public:
+	/**
+	 * A way to identify which sensor is being used
+	 */
 	enum SENSOR_IDX 
 	{
 		Sensor_Kinect = 0,
